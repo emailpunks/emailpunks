@@ -505,6 +505,28 @@ nav {
     padding-top: 30px;
 }
 
+.hero-content .btn-primary,
+.hero-content .btn-secondary {
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+
+    .hero-buttons {
+        display: flex;
+    }
+
+    .hero-buttons>a {
+        flex: 1
+    }
+
+    .hero-content .btn-primary,
+    .hero-content .btn-secondary {
+        width: auto;
+    }
+
+}
+
 .hero-logo {
     width: 160px;
     height: auto;
@@ -633,7 +655,16 @@ nav {
 }
 
 .brand-logo-item.pixie-perfumes img {
-    max-height: 80%;
+    max-height: 70%;
+}
+
+.brand-logo-item.leep img {
+    max-height: 70%;
+}
+
+.brand-logo-item.besque>img {
+    margin: unset;
+    margin-top: -35px;
 }
 
 .brand-logo-item.no-risk-no-story img {
