@@ -1446,73 +1446,21 @@ nav {
 }
 
 .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
     gap: 30px;
-    position: relative;
     z-index: 2;
-}
-
-.portfolio-item {
-    background: var(--pure-white);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: var(--shadow-light);
     transition: all 0.3s ease;
 }
 
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.portfolio-grid .portfolio-item:last-child {
-    grid-column: 1 / -1;
-    max-width: 700px;
-    margin: 0 auto;
-    width: 100%;
-}
-
-@media (max-width: 768px) {
-    .portfolio-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .portfolio-grid .portfolio-item:last-child {
-        grid-column: 1;
-        max-width: 100%;
-    }
-}
-
 .portfolio-item {
-    background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
-    border-radius: 20px;
+    border-radius: var(--border-radius);
     overflow: hidden;
-    box-shadow:
-        0 10px 40px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(249, 188, 60, 0.2),
-        inset 0 1px 0 rgba(249, 188, 60, 0.1);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    max-height: 600px;
-}
-
-.portfolio-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(249, 188, 60, 0.03) 0%, transparent 50%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
+    box-shadow: var(--shadow-light);
+    flex-shrink: 0;
+    width: 50%;
 }
 
 .portfolio-item:hover {
@@ -1562,7 +1510,6 @@ nav {
     overflow-y: auto;
     overflow-x: hidden;
     flex: 1;
-    padding: 20px 40px 40px 40px;
     scrollbar-width: thin;
     scrollbar-color: rgba(249, 188, 60, 0.5) rgba(30, 30, 30, 0.5);
     display: flex;
@@ -1596,8 +1543,6 @@ nav {
     display: block;
     object-fit: contain;
     transition: none;
-    margin-bottom: 20px;
-    border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
@@ -2368,12 +2313,6 @@ nav {
         gap: 40px;
     }
 
-
-
-    .portfolio-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-
     .results-images {
         grid-template-columns: 1fr;
     }
@@ -2411,10 +2350,6 @@ nav {
 
     .service-card {
         padding: 30px 20px;
-    }
-
-    .portfolio-grid {
-        grid-template-columns: 1fr;
     }
 
     .phone-mockups {
