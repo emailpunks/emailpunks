@@ -714,7 +714,6 @@ nav {
     width: auto;
     opacity: 0.8;
     transition: all 0.4s ease;
-    filter: brightness(0) invert(1);
 }
 
 .platform-logo.shopifypartner {
@@ -723,7 +722,7 @@ nav {
 
 .platform-logo:hover {
     transform: scale(1.05);
-    filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(249, 188, 60, 0.4));
+    filter: drop-shadow(0 0 15px rgba(249, 188, 60, 0.4));
 }
 
 /* Subtle gold glow animation for partner logos */
