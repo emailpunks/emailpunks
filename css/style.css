@@ -1593,6 +1593,12 @@ nav {
     max-height: 600px;
 }
 
+@media (max-width: 768px) {
+    .portfolio-image-wrapper {
+        max-height: 400px;
+    }
+}
+
 .portfolio-item::-webkit-scrollbar {
     width: 8px;
 }
