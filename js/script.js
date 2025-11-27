@@ -158,4 +158,20 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.style.setProperty('--mouse-x', x + '%');
         document.documentElement.style.setProperty('--mouse-y', y + '%');
     });
+
+    const topScrollMirror = document.querySelector('.top-scroll-mirror');
+    const scrollContentWidthHelper = document.querySelector('.scroll-content-width-helper');
+    const actualScrollableContent = document.querySelector('.portfolio-grid');
+
+    // get actual width of portfolio grid
+    const actualScrollableContentWidth = actualScrollableContent.scrollWidth;
+    scrollContentWidthHelper.style.width = actualScrollableContentWidth + 'px';
+
+    topScrollMirror.addEventListener('scroll', () => {
+        actualScrollableContent.scrollLeft = topScrollMirror.scrollLeft;
+    });
+
+    actualScrollableContent.addEventListener('scroll', () => {
+        topScrollMirror.scrollLeft = actualScrollableContent.scrollLeft;
+    });
 });

@@ -1444,6 +1444,22 @@ nav {
     pointer-events: none;
 }
 
+.top-scroll-mirror {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(249, 188, 60, 0.5) rgba(30, 30, 30, 0.5);
+    background: transparent;
+    height: 8px;
+    margin-bottom: 8px;
+}
+
+.scroll-content-width-helper {
+    height: 1px;
+    /* Minimal height needed for it to exist */
+}
+
 .portfolio-grid {
     display: flex;
     overflow-x: hidden;
@@ -1456,6 +1472,7 @@ nav {
     z-index: 999;
     scrollbar-width: thin;
     scrollbar-color: rgba(249, 188, 60, 0.5) rgba(30, 30, 30, 0.5);
+    padding-bottom: 12px;
 }
 
 .portfolio-grid {
@@ -1467,7 +1484,7 @@ nav {
     overflow: hidden;
     box-shadow: var(--shadow-light);
     flex-shrink: 0;
-    width: 50%;
+    width: 40%;
 }
 
 @media (max-width: 768px) {
