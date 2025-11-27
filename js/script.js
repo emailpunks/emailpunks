@@ -207,8 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const topScrollMirror = document.querySelector('.top-scroll-mirror');
     const topScrollMirrorThumb = document.querySelector('.top-scroll-thumb');
-    const scrollContentWidthHelper = document.querySelector('.scroll-content-width-helper');
     const actualScrollableContent = document.querySelector('.portfolio-grid');
+    const portfolioContainer = document.querySelector('.portfolio > .container');
+
+    let isDragging = false;
+    let startX;
+    let initialLeft;
 
 
     topScrollMirror.addEventListener('scroll', () => {
@@ -219,14 +223,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
     actualScrollableContent.addEventListener('scroll', () => {
 
-        scrollPercentage = (actualScrollableContent.scrollLeft / (actualScrollableContent.scrollWidth - actualScrollableContent.clientWidth)) * 100;
-        newPosition = (topScrollMirror.clientWidth * (scrollPercentage / 100) - topScrollMirrorThumb.clientWidth);
+        if (isDragging) return;
 
-        if (newPosition <= 0) {
-            newPosition = 0;
+        const scrollRatio = actualScrollableContent.scrollLeft / (actualScrollableContent.scrollWidth - actualScrollableContent.clientWidth);
+        const thumbWidth = (actualScrollableContent.clientWidth / actualScrollableContent.scrollWidth) * actualScrollableContent.clientWidth;
+        const thumbPosition = scrollRatio * (actualScrollableContent.clientWidth - thumbWidth);
+
+        topScrollMirrorThumb.style.width = thumbWidth + 'px';
+        topScrollMirrorThumb.style.transform = `translateX(${thumbPosition}px)`;
+
+    });
+
+    actualScrollableContent.dispatchEvent(new Event('scroll'));
+
+    topScrollMirrorThumb.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX; // Get initial mouse X position
+        initialLeft = topScrollMirrorThumb.offsetLeft; // Get initial element's left position
+        topScrollMirrorThumb.style.cursor = 'grabbing'; // Change cursor while dragging
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+
+        const dx = e.clientX - startX; // Calculate mouse movement
+        const left = initialLeft + dx; // Calculate new left position
+
+        topScrollMirrorThumb.style.transform = `translateX(${left}px)`;
+
+        // Calculate scroll amount based on mouse movement
+        const scrollAmount = (left / topScrollMirror.offsetWidth) * (actualScrollableContent.scrollWidth - actualScrollableContent.clientWidth);
+        actualScrollableContent.scrollLeft = scrollAmount;
+
+        // Prevent drag if start or end of element is reached
+        if (left <= 0) {
+            topScrollMirrorThumb.style.transform = 'translateX(0)';
+            actualScrollableContent.scrollLeft = 0;
+        } else if (left >= topScrollMirror.offsetWidth - topScrollMirrorThumb.offsetWidth) {
+            topScrollMirrorThumb.style.transform = `translateX(${topScrollMirror.offsetWidth - topScrollMirrorThumb.offsetWidth}px)`;
+            actualScrollableContent.scrollLeft = actualScrollableContent.scrollWidth - actualScrollableContent.clientWidth;
         }
+    });
 
-        topScrollMirrorThumb.style.left = newPosition + 'px';
-
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        topScrollMirrorThumb.style.cursor = 'grab'; // Reset cursor
     });
 });
