@@ -159,114 +159,19 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.style.setProperty('--mouse-y', y + '%');
     });
 
-    const scrollContainer = document.querySelector('.portfolio-grid');
-    const scrollLeftBtn = document.getElementById('scroll-left');
-    const scrollRightBtn = document.getElementById('scroll-right');
-    let intervalId = null;
-
-    scrollLeftBtn.addEventListener('mousedown', () => {
-        intervalId = setInterval(() => {
-            scrollContainer.scrollBy({
-                left: -100, // Adjust scroll amount as needed
-                behavior: 'smooth'
-            });
-        }, 50); // Repeat every 100 milliseconds
-    });
-
-    scrollRightBtn.addEventListener('mousedown', () => {
-        intervalId = setInterval(() => {
-            scrollContainer.scrollBy({
-                left: 100, // Adjust scroll amount as needed
-                behavior: 'smooth'
-            });
-        }, 50); // Repeat every 100 milliseconds
-    });
-
-    scrollRightBtn.addEventListener('mouseup', () => {
-        clearInterval(intervalId);
-    });
-
-    scrollLeftBtn.addEventListener('mouseup', () => {
-        clearInterval(intervalId);
-    });
-
-    // Optional: Add a mouseleave event listener if the action should stop when the mouse leaves the element while still pressed
-    scrollRightBtn.addEventListener('mouseleave', () => {
-        if (intervalId) { // Only clear if an interval is active
-            clearInterval(intervalId);
-            intervalId = null; // Reset intervalId
-        }
-    });
-
-    scrollLeftBtn.addEventListener('mouseleave', () => {
-        if (intervalId) { // Only clear if an interval is active
-            clearInterval(intervalId);
-            intervalId = null; // Reset intervalId
-        }
-    });
-
     const topScrollMirror = document.querySelector('.top-scroll-mirror');
-    const topScrollMirrorThumb = document.querySelector('.top-scroll-thumb');
+    const scrollContentWidthHelper = document.querySelector('.scroll-content-width-helper');
     const actualScrollableContent = document.querySelector('.portfolio-grid');
-    const portfolioContainer = document.querySelector('.portfolio > .container');
 
-    let isDragging = false;
-    let startX;
-    let initialLeft;
-
+    // get actual width of portfolio grid
+    const actualScrollableContentWidth = actualScrollableContent.scrollWidth;
+    scrollContentWidthHelper.style.width = actualScrollableContentWidth + 'px';
 
     topScrollMirror.addEventListener('scroll', () => {
-
-        scrollPercentage = (actualScrollableContent.scrollLeft / (actualScrollableContent.scrollWidth - actualScrollableContent.clientWidth)) * 100;
-        console.log(scrollPercentage);
+        actualScrollableContent.scrollLeft = topScrollMirror.scrollLeft;
     });
 
     actualScrollableContent.addEventListener('scroll', () => {
-
-        if (isDragging) return;
-
-        const scrollRatio = actualScrollableContent.scrollLeft / (actualScrollableContent.scrollWidth - actualScrollableContent.clientWidth);
-        const thumbWidth = (actualScrollableContent.clientWidth / actualScrollableContent.scrollWidth) * actualScrollableContent.clientWidth;
-        const thumbPosition = scrollRatio * (actualScrollableContent.clientWidth - thumbWidth);
-
-        topScrollMirrorThumb.style.width = thumbWidth + 'px';
-        topScrollMirrorThumb.style.transform = `translateX(${thumbPosition}px)`;
-
-    });
-
-    actualScrollableContent.dispatchEvent(new Event('scroll'));
-
-    topScrollMirrorThumb.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.clientX; // Get initial mouse X position
-        initialLeft = topScrollMirrorThumb.offsetLeft; // Get initial element's left position
-        topScrollMirrorThumb.style.cursor = 'grabbing'; // Change cursor while dragging
-    });
-
-    document.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-
-        const dx = e.clientX - startX; // Calculate mouse movement
-        const left = initialLeft + dx; // Calculate new left position
-
-        topScrollMirrorThumb.style.transform = `translateX(${left}px)`;
-
-        // Calculate scroll amount based on mouse movement
-        const scrollAmount = (left / topScrollMirror.offsetWidth) * (actualScrollableContent.scrollWidth - actualScrollableContent.clientWidth);
-        actualScrollableContent.scrollLeft = scrollAmount;
-
-        // Prevent drag if start or end of element is reached
-        if (left <= 0) {
-            topScrollMirrorThumb.style.transform = 'translateX(0)';
-            actualScrollableContent.scrollLeft = 0;
-        } else if (left >= topScrollMirror.offsetWidth - topScrollMirrorThumb.offsetWidth) {
-            topScrollMirrorThumb.style.transform = `translateX(${topScrollMirror.offsetWidth - topScrollMirrorThumb.offsetWidth}px)`;
-            actualScrollableContent.scrollLeft = actualScrollableContent.scrollWidth - actualScrollableContent.clientWidth;
-        }
-    });
-
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-        topScrollMirrorThumb.style.cursor = 'grab'; // Reset cursor
+        topScrollMirror.scrollLeft = actualScrollableContent.scrollLeft;
     });
 });
