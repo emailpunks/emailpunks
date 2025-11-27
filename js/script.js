@@ -159,19 +159,74 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.style.setProperty('--mouse-y', y + '%');
     });
 
+    const scrollContainer = document.querySelector('.portfolio-grid');
+    const scrollLeftBtn = document.getElementById('scroll-left');
+    const scrollRightBtn = document.getElementById('scroll-right');
+    let intervalId = null;
+
+    scrollLeftBtn.addEventListener('mousedown', () => {
+        intervalId = setInterval(() => {
+            scrollContainer.scrollBy({
+                left: -100, // Adjust scroll amount as needed
+                behavior: 'smooth'
+            });
+        }, 50); // Repeat every 100 milliseconds
+    });
+
+    scrollRightBtn.addEventListener('mousedown', () => {
+        intervalId = setInterval(() => {
+            scrollContainer.scrollBy({
+                left: 100, // Adjust scroll amount as needed
+                behavior: 'smooth'
+            });
+        }, 50); // Repeat every 100 milliseconds
+    });
+
+    scrollRightBtn.addEventListener('mouseup', () => {
+        clearInterval(intervalId);
+    });
+
+    scrollLeftBtn.addEventListener('mouseup', () => {
+        clearInterval(intervalId);
+    });
+
+    // Optional: Add a mouseleave event listener if the action should stop when the mouse leaves the element while still pressed
+    scrollRightBtn.addEventListener('mouseleave', () => {
+        if (intervalId) { // Only clear if an interval is active
+            clearInterval(intervalId);
+            intervalId = null; // Reset intervalId
+        }
+    });
+
+    scrollLeftBtn.addEventListener('mouseleave', () => {
+        if (intervalId) { // Only clear if an interval is active
+            clearInterval(intervalId);
+            intervalId = null; // Reset intervalId
+        }
+    });
+
     const topScrollMirror = document.querySelector('.top-scroll-mirror');
+    const topScrollMirrorThumb = document.querySelector('.top-scroll-thumb');
     const scrollContentWidthHelper = document.querySelector('.scroll-content-width-helper');
     const actualScrollableContent = document.querySelector('.portfolio-grid');
 
-    // get actual width of portfolio grid
-    const actualScrollableContentWidth = actualScrollableContent.scrollWidth;
-    scrollContentWidthHelper.style.width = actualScrollableContentWidth + 'px';
 
     topScrollMirror.addEventListener('scroll', () => {
-        actualScrollableContent.scrollLeft = topScrollMirror.scrollLeft;
+
+        scrollPercentage = (actualScrollableContent.scrollLeft / (actualScrollableContent.scrollWidth - actualScrollableContent.clientWidth)) * 100;
+        console.log(scrollPercentage);
     });
 
     actualScrollableContent.addEventListener('scroll', () => {
-        topScrollMirror.scrollLeft = actualScrollableContent.scrollLeft;
+
+        scrollPercentage = (actualScrollableContent.scrollLeft / (actualScrollableContent.scrollWidth - actualScrollableContent.clientWidth)) * 100;
+        newPosition = (topScrollMirror.clientWidth * (scrollPercentage / 100) - topScrollMirrorThumb.clientWidth);
+
+        if (newPosition <= 0) {
+            newPosition = 0;
+        }
+
+        topScrollMirrorThumb.style.left = newPosition + 'px';
+
     });
 });

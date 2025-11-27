@@ -1444,15 +1444,59 @@ nav {
     pointer-events: none;
 }
 
+.scroll-container {
+    width: 300px;
+    /* Define a fixed width for the visible area */
+    overflow-x: hidden;
+    /* Hide the default horizontal scrollbar */
+    white-space: nowrap;
+    /* Prevent content from wrapping */
+}
+
+.scroll-content {
+    display: inline-flex;
+    /* Arrange items horizontally */
+}
+
+.scroll-controls {
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.scroll-controls button {
+    padding: 10px 15px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
 .top-scroll-mirror {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-    scrollbar-width: thin;
     scrollbar-color: rgba(249, 188, 60, 0.5) rgba(30, 30, 30, 0.5);
     background: transparent;
-    height: 8px;
-    margin-bottom: 8px;
+    height: 6px;
+    scrollbar-width: none;
+    width: 100%;
+    background-color: rgba(30, 30, 30, 0.5);
+    position: relative;
+}
+
+.top-scroll-mirror::-webkit-scrollbar {
+    display: none;
+}
+
+.top-scroll-thumb {
+    width: 60px;
+    height: 6px;
+    background-color: rgba(249, 188, 60, 0.5);
+    border-radius: 4px;
+    position: absolute;
 }
 
 .scroll-content-width-helper {
@@ -1464,7 +1508,7 @@ nav {
     display: flex;
     overflow-x: hidden;
     overflow-y: hidden;
-    white-space: nowrap;
+
     gap: 30px;
     z-index: 2;
     transition: all 0.3s ease;
