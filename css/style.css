@@ -2472,10 +2472,6 @@ nav {
         align-items: center;
     }
 
-    .portfolio-image {
-        max-width: 300px;
-    }
-
     .testimonials-track {
         width: calc(280px * 12);
     }
