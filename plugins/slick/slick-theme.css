@@ -272,3 +272,9 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
+.slick-track {
+    padding: 30px 20px;
+    display: flex;
+    gap: 10px;
+}
