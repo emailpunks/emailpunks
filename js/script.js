@@ -159,19 +159,47 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.style.setProperty('--mouse-y', y + '%');
     });
 
-    const topScrollMirror = document.querySelector('.top-scroll-mirror');
-    const scrollContentWidthHelper = document.querySelector('.scroll-content-width-helper');
-    const actualScrollableContent = document.querySelector('.portfolio-grid');
-
-    // get actual width of portfolio grid
-    const actualScrollableContentWidth = actualScrollableContent.scrollWidth;
-    scrollContentWidthHelper.style.width = actualScrollableContentWidth + 'px';
-
-    topScrollMirror.addEventListener('scroll', () => {
-        actualScrollableContent.scrollLeft = topScrollMirror.scrollLeft;
-    });
-
-    actualScrollableContent.addEventListener('scroll', () => {
-        topScrollMirror.scrollLeft = actualScrollableContent.scrollLeft;
-    });
 });
+
+$(function () {
+
+    function bindTopDotClicks(slick) {
+        $('.top-dots li').on('click', function () {
+            const index = $(this).index();
+            slick.slickGoTo(index);
+        });
+    }
+
+    $('.portfolio-grid').on('init reInit afterChange', function (event, slick) {
+        let dots = slick.$dots.clone();
+        $('.top-dots').html(dots);
+
+        bindTopDotClicks(slick);
+    });
+
+    $('.portfolio-grid').slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        arrows: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    arrows: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false
+                }
+            }
+        ]
+    });
+})
