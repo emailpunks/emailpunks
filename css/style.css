@@ -1506,8 +1506,6 @@ nav {
 }
 
 .portfolio-grid {
-    display: flex;
-    gap: 30px;
     transition: all 0.3s ease;
     position: relative;
     z-index: 998;
@@ -1517,13 +1515,7 @@ nav {
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow-light);
-    flex-shrink: 0;
-}
-
-@media (max-width: 768px) {
-    .portfolio-item {
-        width: 100%;
-    }
+    width: 92%;
 }
 
 
