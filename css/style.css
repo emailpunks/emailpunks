@@ -1566,7 +1566,7 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-height: 800px;
+    max-height: 730px;
     scrollbar-width: thin;
     scrollbar-color: rgba(249, 188, 60, 0.5) rgba(30, 30, 30, 0.5);
     overflow-y: auto;
