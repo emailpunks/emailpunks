@@ -276,3 +276,15 @@
 .slick-track {
     padding: 30px 20px;
 }
+
+#results .slick-track {
+    padding: unset;
+}
+
+#results .slick-list {
+    overflow: hidden;
+}
+
+#results .slider-container {
+    overflow: hidden;
+}

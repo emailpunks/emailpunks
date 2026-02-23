@@ -1672,6 +1672,7 @@ nav {
 .results-content {
     max-width: 900px;
     margin: 0 auto;
+    margin-bottom: 60px;
 }
 
 .result-video-container {
@@ -1854,7 +1855,6 @@ nav {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 600;
-    font-style: italic;
     filter: drop-shadow(0 0 10px rgba(249, 188, 60, 0.3));
 }
 
@@ -1919,13 +1919,13 @@ nav {
 .testimonials-track {
     display: flex;
     animation: scroll 30s linear infinite;
-    width: calc(350px * 12);
-    /* 6 testimonials duplicated */
+    width: calc(350px * 18);
+    /* 9 testimonials duplicated */
 }
 
 /* Duplicate testimonials for seamless loop */
-.testimonials-track .testimonial-card:nth-child(n+7) {
-    /* Duplicate the first 6 testimonials */
+.testimonials-track .testimonial-card:nth-child(n+10) {
+    /* Duplicate the first 9 testimonials */
 }
 
 @keyframes scroll {
@@ -2162,7 +2162,6 @@ nav {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 20px;
-    font-style: italic;
     filter: drop-shadow(0 0 20px rgba(249, 188, 60, 0.3));
 }
 
@@ -2170,6 +2169,7 @@ nav {
     font-size: 20px;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.85);
+    font-style: italic;
 }
 
 /* Contact Section */
@@ -2396,7 +2396,7 @@ nav {
     }
 
     .testimonials-track {
-        width: calc(300px * 12);
+        width: calc(300px * 18);
     }
 
     .testimonial-card {
@@ -2436,7 +2436,7 @@ nav {
     }
 
     .testimonials-track {
-        width: calc(280px * 12);
+        width: calc(280px * 18);
     }
 
     .testimonial-card {

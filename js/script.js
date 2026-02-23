@@ -163,8 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 $(function () {
 
-    function bindTopDotClicks(slick) {
-        $('.top-dots li').on('click', function () {
+    function bindPortfolioTopDotClicks(slick) {
+        $('#portfolio .top-dots li').on('click', function () {
             const index = $(this).index();
             slick.slickGoTo(index);
         });
@@ -172,9 +172,9 @@ $(function () {
 
     $('.portfolio-grid').on('init reInit afterChange', function (event, slick) {
         let dots = slick.$dots.clone();
-        $('.top-dots').html(dots);
+        $('#portfolio .top-dots').html(dots);
 
-        bindTopDotClicks(slick);
+        bindPortfolioTopDotClicks(slick);
     });
 
     $('.portfolio-grid').slick({
@@ -201,5 +201,29 @@ $(function () {
                 }
             }
         ]
+    });
+
+    // Results Slick
+    function bindResultsTopDotClicks(slick) {
+        $('#results .top-dots li').on('click', function () {
+            const index = $(this).index();
+            slick.slickGoTo(index);
+        });
+    }
+
+    $('.results-slider').on('init reInit afterChange', function (event, slick) {
+        let dots = slick.$dots.clone();
+        $('#results .top-dots').html(dots);
+
+        bindResultsTopDotClicks(slick);
+    });
+
+    $('.results-slider').slick({
+        centerMode: true,
+        dots: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        infinite: false,
     });
 })
