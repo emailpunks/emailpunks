@@ -162,21 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 $(function () {
-
-    function bindPortfolioTopDotClicks(slick) {
-        $('#portfolio .top-dots li').on('click', function () {
-            const index = $(this).index();
-            slick.slickGoTo(index);
-        });
-    }
-
-    $('.portfolio-grid').on('init reInit afterChange', function (event, slick) {
-        let dots = slick.$dots.clone();
-        $('#portfolio .top-dots').html(dots);
-
-        bindPortfolioTopDotClicks(slick);
-    });
-
     $('.portfolio-grid').slick({
         dots: true,
         slidesToShow: 3,
@@ -204,20 +189,6 @@ $(function () {
     });
 
     // Results Slick
-    function bindResultsTopDotClicks(slick) {
-        $('#results .top-dots li').on('click', function () {
-            const index = $(this).index();
-            slick.slickGoTo(index);
-        });
-    }
-
-    $('.results-slider').on('init reInit afterChange', function (event, slick) {
-        let dots = slick.$dots.clone();
-        $('#results .top-dots').html(dots);
-
-        bindResultsTopDotClicks(slick);
-    });
-
     $('.results-slider').slick({
         centerMode: true,
         dots: true,

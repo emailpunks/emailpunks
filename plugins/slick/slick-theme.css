@@ -197,27 +197,6 @@
     color: black;
 }
 
-.top-dots {
-    height: 50px;
-    width: 100%;
-    text-align: center;
-    z-index: 30;
-}
-
-.top-dots .slick-dots {
-    position: relative;
-    top: 0;
-}
-
-.top-dots .slick-dots li button:before {
-    font-size: 12px;
-    color: #ccc;
-}
-
-.top-dots .slick-dots li.slick-active button:before {
-    color: #000;
-}
-
 /* Make arrows bigger + transparent background */
 .slick-prev,
 .slick-next {
