@@ -139,17 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Testimonial carousel pause on hover
-    const testimonialsTrack = document.querySelector('.testimonials-track');
-    if (testimonialsTrack) {
-        testimonialsTrack.addEventListener('mouseenter', () => {
-            testimonialsTrack.style.animationPlayState = 'paused';
-        });
-
-        testimonialsTrack.addEventListener('mouseleave', () => {
-            testimonialsTrack.style.animationPlayState = 'running';
-        });
-    }
 
     // Gold background animation follows mouse
     document.addEventListener('mousemove', (e) => {
@@ -190,11 +179,38 @@ $(function () {
 
     // Results Slick
     $('.results-slider').slick({
-        centerMode: true,
+        centerMode: false,
         dots: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: true,
         infinite: false,
+    });
+
+    // Testimonials sliders (top and bottom - same style)
+    $('.testimonials-slider-top, .testimonials-slider-bottom').slick({
+        dots: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        arrows: true,
+        infinite: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    arrows: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: true
+                }
+            }
+        ]
     });
 })
