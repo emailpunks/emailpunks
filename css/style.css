@@ -975,7 +975,7 @@ nav {
 /* Section Headers */
 .section-header {
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 20px;
 }
 
 .section-title {
@@ -1665,6 +1665,7 @@ nav {
             transparent 70%);
     animation: shimmerMove 20s ease-in-out infinite;
     filter: blur(50px);
+    pointer-events: none;
 }
 
 .results::after {
@@ -1678,6 +1679,7 @@ nav {
     border-radius: 50%;
     animation: pulse 10s ease-in-out infinite;
     filter: blur(30px);
+    pointer-events: none;
 }
 
 .results-content {
