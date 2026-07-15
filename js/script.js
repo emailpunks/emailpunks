@@ -42,7 +42,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.section-header, .hero-content > *, .portfolio-item, .testimonial-card');
+    const animatedElements = document.querySelectorAll('.section-header, .hero-content > *, .portfolio-item, .testimonial-card, .instagram-item');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -148,7 +148,52 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.style.setProperty('--mouse-y', y + '%');
     });
 
+    loadInstagramFeed();
 });
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function observeInstagramItems() {
+    const items = document.querySelectorAll('.instagram-item');
+    items.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+}
+
+async function loadInstagramFeed() {
+    const grid = document.getElementById('instagram-grid');
+    if (!grid) return;
+
+    try {
+        const res = await fetch('/.netlify/functions/instagram');
+        const payload = await res.json();
+
+        if (!res.ok || !payload.data?.length) {
+            grid.innerHTML = '<p class="instagram-error">Unable to load Instagram posts.</p>';
+            return;
+        }
+
+        grid.innerHTML = payload.data.map(post => {
+            const image = post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url;
+            const caption = escapeHtml(post.caption || 'Instagram post');
+            return `
+                <a class="instagram-item" href="${post.permalink}" target="_blank" rel="noopener noreferrer">
+                    <img src="${image}" alt="${caption}" loading="lazy" />
+                </a>`;
+        }).join('');
+
+        observeInstagramItems();
+    } catch {
+        grid.innerHTML = '<p class="instagram-error">Unable to load Instagram posts.</p>';
+    }
+}
 
 $(function () {
     $('.portfolio-grid').slick({
