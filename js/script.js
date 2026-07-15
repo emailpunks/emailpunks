@@ -198,7 +198,7 @@ async function loadInstagramFeed() {
 $(function () {
     $('.portfolio-grid').slick({
         dots: true,
-        slidesToShow: 3,
+        slidesToShow: 5,
         slidesToScroll: 1,
         arrows: true,
         infinite: false,
