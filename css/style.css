@@ -1523,7 +1523,7 @@ nav {
 }
 
 .portfolio-grid .slick-track{
-    padding: 30px 12px !important;
+    padding: 30px 8px !important;
 }
 .portfolio-item {
     border-radius: var(--border-radius);
