@@ -1522,6 +1522,9 @@ nav {
     z-index: 998;
 }
 
+.portfolio-grid .slick-track{
+    padding: 30px 12px !important;
+}
 .portfolio-item {
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -2402,10 +2405,10 @@ nav {
 }
 
 .slick-prev{
-    left: -60px !important;
+    left: -40px !important;
 }
 .slick-next{
-    right: -60px !important;
+    right: -40px !important;
 }
 
 /* Responsive Design */
