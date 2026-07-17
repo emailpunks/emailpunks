@@ -42,7 +42,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.section-header, .hero-content > *, .portfolio-item, .testimonial-card, .instagram-item');
+    const animatedElements = document.querySelectorAll('.section-header, .hero-content > *, .portfolio-item, .testimonial-card');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -157,16 +157,6 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-function observeInstagramItems() {
-    const items = document.querySelectorAll('.instagram-item');
-    items.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-}
-
 async function loadInstagramFeed() {
     const grid = document.getElementById('instagram-grid');
     if (!grid) return;
@@ -189,7 +179,33 @@ async function loadInstagramFeed() {
                 </a>`;
         }).join('');
 
-        observeInstagramItems();
+        if ($(grid).hasClass('slick-initialized')) {
+            $(grid).slick('unslick');
+        }
+
+        $(grid).slick({
+            dots: true,
+            arrows: true,
+            infinite: false,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
     } catch {
         grid.innerHTML = '<p class="instagram-error">Unable to load Instagram posts.</p>';
     }

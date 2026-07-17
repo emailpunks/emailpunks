@@ -14,7 +14,7 @@ exports.handler = async () => {
 
   const fields =
     'id,caption,media_url,permalink,thumbnail_url,media_type,timestamp';
-  const url = `https://graph.facebook.com/v21.0/${userId}/media?fields=${fields}&limit=4&access_token=${token}`;
+  const url = `https://graph.facebook.com/v21.0/${userId}/media?fields=${fields}&limit=8&access_token=${token}`;
 
   try {
     const res = await fetch(url);
